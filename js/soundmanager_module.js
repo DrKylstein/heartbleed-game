@@ -15,6 +15,16 @@ var soundmanager_module = (function() {
   
   }
   
+  function getNames(urls) {
+	var re = /\w*(?=\.);	
+	var names = [];
+	for(int i=0; i<url.length;i++) {
+		name = urls[i].search(re)[0].substring(1);
+		names.push(name);
+	}
+	reutrn names;
+  }
+  
   /*
    * SoundManager class
    */
@@ -23,23 +33,8 @@ var soundmanager_module = (function() {
   {
     //private
     this.m_sounds = sounds;
-    this.m_soundNames = ;
+    this.m_soundNames = getNames(sounds);
     this.enabled = true;
-    this.m_correctPassword = '';
-    this.m_won = false;
-    this.m_duds = [];
-    this.m_wordPool = [
-      'enthronement',
-      'untimeliness',
-      'steeplejacks',
-      'gesticulates',
-      'spitefullest',
-      'coefficients',
-      'dispossesses',
-      'discomposure',
-      'electroplate',
-      'anthologists'
-    ];
     
     //public, just callbacks
     this.onMessage = function(str){
