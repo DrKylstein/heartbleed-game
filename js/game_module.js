@@ -2,7 +2,7 @@
  * Game Module
  * K. Delaney
  */
-//TODO: attempts running out and bracket extra attempts
+//TODO: bracket bonus attempts
 var game_module = (function() {
   var module = {};
     
