@@ -2,7 +2,7 @@
  * Game Module
  * K. Delaney
  */
-
+//TODO: attempts running out and bracket extra attempts
 var game_module = (function() {
   var module = {};
     
@@ -57,7 +57,7 @@ var game_module = (function() {
     this.m_soundManager = soundManager;
     this.m_tries = START_TRIES; //attempts left
     this.m_correctPassword = '';
-    this.m_won = false;
+    this.m_gameOver = false;
     this.m_duds = [];
     this.m_wordPool = [
       'enthronement',
@@ -86,10 +86,12 @@ var game_module = (function() {
 
   //methods
   HeartbleedGame.prototype.tryItem = function HeartbleedGame_tryItem(index) {
+    if(this.m_gameOver == true) return;
+    
     var candidate = this.m_memoryContents.get(index);
     if(candidate == this.m_correctPassword) {
       this.onMessage('ACCESS GRANTED');
-      this.m_won = true;
+      this.m_gameOver = true;
     } else if(candidate.startsWith('{') && candidate.endsWith('}')) {
       this.m_memoryContents.blankOut(this.m_duds.pop());
       this.onMessage('Dud removed.');
@@ -98,6 +100,9 @@ var game_module = (function() {
       this.onMessage('ACCESS DENIED');
       this.onMessage(countMatches(candidate, this.m_correctPassword)+'/'+
         this.m_correctPassword.length+' correct.');
+      if(this.m_tries <= 0) {
+          this.m_gameOver = true;
+      }
     }
   }
   HeartbleedGame.prototype.reset = function HeartbleedGame_reset() {
