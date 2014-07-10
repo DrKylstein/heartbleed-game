@@ -11,8 +11,7 @@
     background: #000;
     margin: 100px auto;
     color: #FFF;
-    /*font-family: 'Inconsolata';*/
-    font-family: 'Monaco';
+    font-family: 'Inconsolata';
 }
 
 #info
@@ -41,8 +40,6 @@
 {
     width: 172px;
     background-color: #111;
-    /*word-break: break-all;*/
-    
 }
 
 #console
