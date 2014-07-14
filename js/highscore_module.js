@@ -19,15 +19,19 @@ var highscore_module = (function() {
   {
     //private
     if(typeof name !== "undefined")  this.m_name = name;
-    this.m_scores == [];
    
+    //public
+    this.scores = [];
+    
   }
 
   //methods
   Highscore.prototype.getScores = function Highscore_getScores() {
     $.getJSON("/api/highscores", function(data) {
-      console.log(data)
+      this.scores = data;
     });
+    
+    return this.scores;
   }
   
   Highscore.prototype.postScore = function Highscore_postScore(name, score) {
