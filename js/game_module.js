@@ -2,7 +2,7 @@
  * Game Module
  * K. Delaney
  */
-//TODO: attempts running out and bracket extra attempts
+
 var game_module = (function() {
   var module = {};
     
@@ -11,7 +11,16 @@ var game_module = (function() {
    */
     
     START_TRIES = 4;
-    CODES_COUNT = 8;
+
+    WORD_COUNT = 7;
+    BRACKET_COUNT = 5;
+    GARBAGE_COUNT = 9;
+    
+    GAIN_TRIES = 1/4;
+    
+    GARBAGE = '`~!@#$%^&*-_=+,./?;:"\'\\|';
+    BRACES = ['{}','[]','<>','()'];
+    GARBAGE_LENGTH = 16;
     
   /*
    * Utilities
@@ -45,7 +54,7 @@ var game_module = (function() {
     }
     return matches;
   }
-
+  
   /*
    * HeartbleedGame class
    */
@@ -89,12 +98,27 @@ var game_module = (function() {
     if(this.m_gameOver == true) return;
     
     var candidate = this.m_memoryContents.get(index);
+    
+    //handle braces
+    for(var i = 0; i < BRACES.length; i++) {
+      var style = BRACES[i];
+      if(candidate.startsWith(style.charAt(0)) && 
+      candidate.endsWith(style.charAt(1))) {
+        if(Math.random() < GAIN_TRIES && this.m_tries < START_TRIES) {
+          this.m_tries = START_TRIES;
+          this.onMessage('Attempts reset.');
+        } else {
+          this.m_memoryContents.blankOut(this.m_duds.pop());
+          this.onMessage('Dud removed.');
+        }
+        return;
+      }
+    }
+    
+    //handle password attempts
     if(candidate == this.m_correctPassword) {
       this.onMessage('ACCESS GRANTED');
       this.m_gameOver = true;
-    } else if(candidate.startsWith('{') && candidate.endsWith('}')) {
-      this.m_memoryContents.blankOut(this.m_duds.pop());
-      this.onMessage('Dud removed.');
     } else {
       this.onTriesChange(--this.m_tries);
       this.onMessage('ACCESS DENIED');
@@ -119,17 +143,34 @@ var game_module = (function() {
     var contents = [];
     //fill words, keeping record of the duds
     this.m_duds = [];
-    for(var i = 0; i < CODES_COUNT/2; i++) {
+    for(var i = 0; i < WORD_COUNT; i++) {
       contents.push(this.m_wordPool[i]);
       if(i > 0) {
         this.m_duds.push(this.m_wordPool[i]);
       }
     }
-    //fill garbage
-    for(var i = 0; i < CODES_COUNT/2; i++) {
-      contents.push('{..........}');
+    
+    function randomGarbage(l) {
+      var s = '';
+      for(var j = 0; j < l; j++) {
+        s += GARBAGE.charAt(Math.floor(Math.random()*GARBAGE.length));
+      }
+      return s;
     }
     
+    //fill braces
+    for(var i = 0; i < BRACKET_COUNT; i++) {
+      shuffle(BRACES);
+      var style = BRACES[0];
+      var l = Math.max(Math.floor(Math.random()*GARBAGE_LENGTH),1);
+      var s = randomGarbage(l);
+      contents.push(style.charAt(0)+s+style.charAt(1));
+    }
+    //fill garbage
+    for(var i = 0; i < GARBAGE_COUNT; i++) {
+      var l = Math.max(Math.floor(Math.random()*GARBAGE_LENGTH),1);
+      contents.push(randomGarbage(l));
+    }    
     //set deletion order
     shuffle(this.m_duds);
     
