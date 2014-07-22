@@ -3,8 +3,12 @@
  * K. Delaney
  */
 
+"use strict";
+
 var view_module = (function(){
   var module = {};
+    
+  var COLUMN_LENGTH = 17*12;
     
 /*
  * Utilities
@@ -28,31 +32,50 @@ var view_module = (function(){
       console.warn("Unset MemoryDisplay.onHover called: "+index);
     };
     this.m_rootElement = $(id);
+    this.m_leftElement = this.m_rootElement.find('.characters-1');
+    this.m_rightElement = this.m_rootElement.find('.characters-2');
+    this.m_leftLength = 0;
+    //this.m_rightLength = 0;
     this.reset();
   }
   
-  //not in the spec: it's much easier if we know the number of elements
-  //ahead of time.
+  //not in spec: must be called if elements are removed, or to clear
   MemoryDisplay.prototype.reset = function MemoryDisplay_reset(size) {
-    this.m_rootElement.empty();
-    var parent = this;
-    for(var i = 0; i < size; i++) {
-      //wrapped in an anonymous function so that we get a constant value from 
-      //i.
-      (function(i) {
-        $('<span class="js-codeword"></span>').appendTo(parent.m_rootElement)
-        .click(function MemoryDisplay_word_click() {parent.onSelection(i)})
-        .hover(function MemoryDisplay_word_hover() {parent.onHover(i)});
-      })(i);
-    }
+    this.m_leftElement.empty();
+    this.m_rightElement.empty();
+    this.m_leftLength = 0;
   }
-  
+  //can only change with same length or add new element to end
   MemoryDisplay.prototype.change = function MemoryDisplay_change(index, content) {
-    var html = '';
-    for(var i = 0; i < content.length; i++) {
-      html += '<span class="char">'+escapeSymbols(content.charAt(i))+'</span>';
+    var selection = this.m_leftElement.find('.js-word-'+index);
+    selection.add(this.m_rightElement.find('.js-word-'+index));
+    if(selection.length == 0) {
+      var html = [];
+        
+      for(var i = 0; i < content.length; i++) {
+        html.push('<span class="char js-word-'+index+'">'+escapeSymbols(content.charAt(i))+'</span>');
+      }
+      for(var i = 0; i < html.length; i++) {
+        //pick column
+        var target = this.m_rightElement;
+        if(this.m_leftLength < COLUMN_LENGTH) {
+          target = this.m_leftElement;
+          this.m_leftLength++;
+        }
+        
+        //add element and bind handlers
+        var context = this; //event `this` is not same as member `this`
+        $(html[i]).appendTo(target)
+          .click(function(){context.onSelection(index)})
+          .hover(function(){context.onHover(index)});
+      }
+      
+    } else {
+      selection.each(function(i, element) {
+        element.text(content.charAt(i));
+      })
     }
-    this.m_rootElement.children().eq(index).html(html);
+    
   }
 
   module.MemoryDisplay = MemoryDisplay;
