@@ -10,17 +10,17 @@ var game_module = (function() {
    * Constants
    */
     
-    START_TRIES = 4;
+    var START_TRIES = 4;
 
-    WORD_COUNT = 7;
-    BRACKET_COUNT = 5;
-    GARBAGE_COUNT = 9;
+    var WORD_COUNT = 7;
+    var BRACKET_COUNT = 5;
+    var GARBAGE_COUNT = 9;
     
-    GAIN_TRIES = 1/4;
+    var GAIN_TRIES = 1/4;
     
-    GARBAGE = '`~!@#$%^&*-_=+,./?;:"\'\\|';
-    BRACES = ['{}','[]','<>','()'];
-    GARBAGE_LENGTH = 16;
+    var GARBAGE = '`~!@#$%^&*-_=+,./?;:"\'\\|';
+    var BRACES = ['{}','[]','<>','()'];
+    var GARBAGE_LENGTH = 16;
     
   /*
    * Utilities
@@ -130,7 +130,8 @@ var game_module = (function() {
     }
   }
   HeartbleedGame.prototype.reset = function HeartbleedGame_reset() {
-    this.m_won = false;
+    this.onReset();
+    this.m_gameOver = false;
     this.m_tries = START_TRIES;
     
     shuffle(this.m_wordPool);
@@ -177,6 +178,8 @@ var game_module = (function() {
     //shuffle and submit
     shuffle(contents);
     this.m_memoryContents.fill(contents);
+    
+    this.onMessage('TERMINAL ACTIVE');
   }
 
   //export
@@ -212,7 +215,7 @@ var game_module = (function() {
   }
   //has changed from design doc: now specify a string to find
   MemoryContents.prototype.blankOut = function MemoryContents_blankOut(str) {
-    index = this.m_items.indexOf(str);
+    var index = this.m_items.indexOf(str);
     if(index >= 0) {
       var oldString = this.m_items[index];
       this.m_items[index] = '.'.repeat(oldString.length);

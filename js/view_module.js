@@ -21,12 +21,14 @@ var view_module = (function(){
   
   function MemoryDisplay(id) {
     this.onSelection = function(index) {
-      console.warn("Unset MemoryDisplay.onSelection called: "+index)};
+      console.warn("Unset MemoryDisplay.onSelection called: "+index);
+    };
     //not in spec: added as a way to hook sound effects to hover
     this.onHover = function(index) {
       console.warn("Unset MemoryDisplay.onHover called: "+index);
-    }
+    };
     this.m_rootElement = $(id);
+    this.reset();
   }
   
   //not in the spec: it's much easier if we know the number of elements
