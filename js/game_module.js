@@ -10,17 +10,17 @@ var game_module = (function() {
    * Constants
    */
     
-    START_TRIES = 4;
+    var START_TRIES = 4;
 
-    WORD_COUNT = 7;
-    BRACKET_COUNT = 5;
-    GARBAGE_COUNT = 9;
+    var WORD_COUNT = 7;
+    var BRACKET_COUNT = 5;
+    var GARBAGE_COUNT = 9;
     
-    GAIN_TRIES = 1/4;
+    var GAIN_TRIES = 1/4;
     
-    GARBAGE = '`~!@#$%^&*-_=+,./?;:"\'\\|';
-    BRACES = ['{}','[]','<>','()'];
-    GARBAGE_LENGTH = 16;
+    var GARBAGE = '`~!@#$%^&*-_=+,./?;:"\'\\|';
+    var BRACES = ['{}','[]','<>','()'];
+    var GARBAGE_LENGTH = 16;
     
   /*
    * Utilities
@@ -130,8 +130,10 @@ var game_module = (function() {
     }
   }
   HeartbleedGame.prototype.reset = function HeartbleedGame_reset() {
-    this.m_won = false;
+    this.onReset();
+    this.m_gameOver = false;
     this.m_tries = START_TRIES;
+    this.onTriesChange(this.m_tries);
     
     shuffle(this.m_wordPool);
     
@@ -177,6 +179,8 @@ var game_module = (function() {
     //shuffle and submit
     shuffle(contents);
     this.m_memoryContents.fill(contents);
+    
+    this.onMessage('TERMINAL ACTIVE');
   }
 
   //export
@@ -190,26 +194,29 @@ var game_module = (function() {
   function MemoryContents() {
     this.onChange = function(index, str){
       console.warn("Unset MemoryContents.onChange called: "+index+" : "+str);
+    };    
+    
+    //not in spec, added to ease MemoryDisplay development:
+    this.onReset = function(l){
+      console.warn("Unset MemoryContents.onReset called: "+l);
     };
+    
     this.m_items = ['forgotto', 'initiali', 'ze_oops!'];
   }
   
   //methods
   MemoryContents.prototype.fill = function MemoryContents_fill(items) {
     //notify view(s)
-    for(var i = 0; i < Math.max(this.m_items.length, items.length); i++) {
-      if(i < items.length) {
+    this.onReset(items.length);
+    for(var i = 0; i < items.length; i++) {
         this.onChange(i,items[i]);
-      } else {
-        this.onChange(i,'');
-      }
     }
     //update internals
     this.m_items = items;
   }
   //has changed from design doc: now specify a string to find
   MemoryContents.prototype.blankOut = function MemoryContents_blankOut(str) {
-    index = this.m_items.indexOf(str);
+    var index = this.m_items.indexOf(str);
     if(index >= 0) {
       var oldString = this.m_items[index];
       this.m_items[index] = '.'.repeat(oldString.length);

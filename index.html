@@ -1,11 +1,60 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Heartbleed Game</title>
-        <meta charset="utf8" />
-        <link rel="stylesheet" type="text/css" href="css/default.css" />
-    </head>
-    <body>
+<html lang="en" class="">
+  <head>
+    <meta charset="utf-8">
+    <title>Heartbleed Game</title>
+    <meta name="description" content="">
+    <meta name="designer" content="team 6">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/soundmanager_module.js" type="text/javascript"></script>
+    <script src="js/game_module.js" type="text/javascript"></script>
+    <script src="js/view_module.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="terminal-container">
+      <div id="info">
+        <h1>WOPR</h1>
+        <h2>ENTER PASSWORD NOW</h2>
+        <p id="tries"><span id="number-attempts">4</span> ATTEMPT(S) LEFT: <span id="blocks"># # # #</span></p>
+      </div>
+      <div id="addresses"></div>
+      <div id="characters"></div>
+      
+      <div id="console">
+        <p>>TERMINAL ACTIVE</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>...</p>
+        <p>>YOU CHOSE POORLY</p>
+        <p>>2/5 CORRECT</p>
+        <p>>YOU GUESSED INCORRECTLY</p>
+      </div>
+      
+    </div><!-- /terminal-container -->
 
-    </body>
+    <div id = "volume" onClick ="alert('volume works')">
+    </div>
+    
+    <div id = "power" onClick ="alert('power works')">
+    </div>
+    
+    <div id = "help" onClick ="alert('help works')">
+    </div>
+  </body>
 </html>
