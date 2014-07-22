@@ -12,6 +12,14 @@
                 for(var i = 0; i < 16; i++) {
                     display.change(i,'all&work<and>no"play');
                 }
+                var messageBox = new view_module.MessageBox('#console');
+                for(var i = 0; i < 24; i++) {
+                    messageBox.add('MAKES JACK A DULL BOY. END OF LINE.');
+                }
+                messageBox.clear();
+                for(var i = 0; i < 12; i++) {
+                    messageBox.add('Reclaim your brain, zombie!');
+                }
             })
         </script>
         <style>
@@ -29,9 +37,14 @@
             .char:hover {
                 text-decoration: underline;
             }
+            #console {
+                height: 4em;
+                overflow: auto;
+            }
         </style>
     </head>
     <body>
         <div id = "characters"></div>
+        <div id = "console"></div>
     </body>
 </html>
