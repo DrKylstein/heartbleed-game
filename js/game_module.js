@@ -190,19 +190,22 @@ var game_module = (function() {
   function MemoryContents() {
     this.onChange = function(index, str){
       console.warn("Unset MemoryContents.onChange called: "+index+" : "+str);
+    };    
+    
+    //not in spec, added to ease MemoryDisplay development:
+    this.onReset = function(l){
+      console.warn("Unset MemoryContents.onReset called: "+l);
     };
+    
     this.m_items = ['forgotto', 'initiali', 'ze_oops!'];
   }
   
   //methods
   MemoryContents.prototype.fill = function MemoryContents_fill(items) {
     //notify view(s)
-    for(var i = 0; i < Math.max(this.m_items.length, items.length); i++) {
-      if(i < items.length) {
+    this.onReset(items.length);
+    for(var i = 0; i < items.length; i++) {
         this.onChange(i,items[i]);
-      } else {
-        this.onChange(i,'');
-      }
     }
     //update internals
     this.m_items = items;
