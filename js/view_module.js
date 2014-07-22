@@ -72,7 +72,7 @@ var view_module = (function(){
       
     } else {
       selection.each(function(i, element) {
-        element.text(content.charAt(i));
+        $(element).text(content.charAt(i));
       })
     }
     
