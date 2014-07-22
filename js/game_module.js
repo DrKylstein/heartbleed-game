@@ -133,6 +133,7 @@ var game_module = (function() {
     this.onReset();
     this.m_gameOver = false;
     this.m_tries = START_TRIES;
+    this.onTriesChange(this.m_tries);
     
     shuffle(this.m_wordPool);
     

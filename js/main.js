@@ -19,5 +19,15 @@ $(document).ready(function() {
   game.onReset = $.proxy(messageBox.clear, messageBox);
   display.onSelection = $.proxy(game.tryItem, game);
   
+  var triesBox = $('#tries');
+  
+  game.onTriesChange = function(num) {
+    var blocks = "";
+    for(var i = 0; i < num; i++) {
+      blocks += "# ";
+    }
+    triesBox.html('<span id="number-attempts">'+num+'</span> ATTEMPT(S) LEFT: <span id="blocks">'+blocks+'</span>');
+  }
+  
   game.reset();
 });
