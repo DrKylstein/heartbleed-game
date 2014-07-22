@@ -4,7 +4,7 @@
  */
 
 $(document).ready(function() {
-  var display = new view_module.MemoryDisplay('#memory');
+  var display = new view_module.MemoryDisplay('#terminal-container');
   var messageBox = new view_module.MessageBox('#console');
   var soundManager = new soundmanager_module.SoundManager('');
   var memory = new game_module.MemoryContents();
