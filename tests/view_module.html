@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View Test</title>
+        <meta charset="utf8" />
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/view_module.js"></script>
+        <script>
+            $(document).ready(function() {
+                var display = new view_module.MemoryDisplay("#characters");
+                display.reset(16);
+                for(var i = 0; i < 16; i++) {
+                    display.change(i,'all&work<and>no"play');
+                }
+            })
+        </script>
+        <style>
+            #characters {
+                max-width: 10em;
+                column-count: 2;
+                -moz-column-count: 2;
+                -webkit-column-count: 2;
+                word-break: break-all;
+                font-family: monospace;
+            }
+            .js-codeword:hover {
+                color: blue;
+            }
+            .char:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div id = "characters"></div>
+    </body>
+</html>
