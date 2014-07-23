@@ -48,7 +48,7 @@ $(document).ready(function() {
   game.onReset = $.proxy(messageBox.clear, messageBox);
   display.onSelection = $.proxy(game.tryItem, game);
   display.onHover = function() {
-    soundManager.play("key1");
+    soundManager.playSound("key1");
   }
   
   //set up simple gui elements
