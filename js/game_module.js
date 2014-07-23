@@ -149,12 +149,13 @@ var game_module = (function() {
       candidate.endsWith(style.charAt(1))) {
         if(Math.random() < GAIN_TRIES && this.m_tries < START_TRIES) {
           this.m_tries = START_TRIES;
+          this.onTriesChange(this.m_tries);
           this.onTriesReset();//this.onMessage('Attempts reset.');
         } else {
-          this.m_memoryContents.blankOut(this.m_duds.pop());
+          this.m_memoryContents.blankOut(this.m_memoryContents.find(this.m_duds.pop()));
           this.onDudRemoved();//this.onMessage('Dud removed.');
         }
-        this.m_memoryContents.blankOut(candidate);
+        this.m_memoryContents.blankOut(index);
         return;
       }
     }
@@ -256,14 +257,15 @@ var game_module = (function() {
     //update internals
     this.m_items = items;
   }
-  //has changed from design doc: now specify a string to find
-  MemoryContents.prototype.blankOut = function MemoryContents_blankOut(str) {
-    var index = this.m_items.indexOf(str);
-    if(index >= 0) {
+  MemoryContents.prototype.blankOut = function MemoryContents_blankOut(index) {
+    if(index >= 0 && index < this.m_items.length) {
       var oldString = this.m_items[index];
       this.m_items[index] = '.'.repeat(oldString.length);
       this.onChange(index, this.m_items[index]);
     }
+  }
+  MemoryContents.prototype.find = function MemoryContents_find(str) {
+    return this.m_items.indexOf(str);
   }
   MemoryContents.prototype.get = function MemoryContents_get(index) {
     return this.m_items[index];

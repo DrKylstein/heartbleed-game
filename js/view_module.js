@@ -47,8 +47,7 @@ var view_module = (function(){
   }
   //can only change with same length or add new element to end
   MemoryDisplay.prototype.change = function MemoryDisplay_change(index, content) {
-    var selection = this.m_leftElement.find('.js-word-'+index);
-    selection.add(this.m_rightElement.find('.js-word-'+index));
+    var selection = this.m_rootElement.find('.js-word-'+index);
     if(selection.length == 0) {
       var html = [];
         
@@ -75,8 +74,9 @@ var view_module = (function(){
       }
       
     } else {
-      selection.each(function(i, element) {
-        $(element).text(content.charAt(i));
+      selection.each(function(i) {
+        //`this` is the element
+        $(this).text(content.charAt(i));
       })
     }
     
