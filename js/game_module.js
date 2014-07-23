@@ -12,9 +12,9 @@ var game_module = (function() {
     
     var START_TRIES = 4;
 
-    var WORD_COUNT = 7;
+    var WORD_COUNT = 12;
     var BRACKET_COUNT = 5;
-    var GARBAGE_COUNT = 9;
+    var GARBAGE_COUNT = 20;
     
     var GAIN_TRIES = 1/4;
     
@@ -78,7 +78,36 @@ var game_module = (function() {
       'dispossesses',
       'discomposure',
       'electroplate',
-      'anthologists'
+      'anthologists',
+      'uncultivated',
+      'articulating',
+      'peccadilloes',
+      'brinkmanship',
+      'carbohydrate',
+      'computations',
+      'fractionally',
+      'orthographic',
+      'precognition',
+      'mythological',
+      'ploughshares',
+      'henceforward',
+      'cloverleaves',
+      'congregating',
+      'intensifiers',
+      'redecorating',
+      'vicissitudes',
+      'peacekeeping',
+      'disincentive',
+      'designations',
+      'semitrailers',
+      'thunderstorm',
+      'boondoggling',
+      'plasterboard',
+      'scoutmasters',
+      'unprejudiced',
+      'misjudgments',
+      'demographics',
+      'belligerents'
     ];
     
     //public, just callbacks
