@@ -54,7 +54,7 @@ var soundmanager_module = (function() {
   //methods
   SoundManager.prototype.playSound = function SoundManager_playSound(name) {
     if(this.enabled) {
-      var id = this.m_names.indexOf(name);
+      var id = this.m_soundNames.indexOf(name);
       if(id != null) {
         this.m_playing = this.m_tags[id];
         this.m_playing.play();
