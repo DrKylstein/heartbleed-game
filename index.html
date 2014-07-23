@@ -21,6 +21,7 @@
   }
   </style>
 </head>
+<body class = 'defaultbackground'>
 
 <div id="terminal-container">
   <div id="info">
@@ -63,12 +64,15 @@
   
 </div><!-- /terminal-container -->
 
-	<div id = "volume" onClick ="alert('volume works')">
-	</div>
-	
-	<div id = "power" onClick ="alert('power works')">
-	</div>
-	
+    <div id = "volume" onClick ="$('body').toggleClass('musicoffbackground')">
+    </div>
+
+
+
+    
+    <div id = "power" onClick ="$('body').toggleClass('offbackground'); $('#terminal-container').toggleClass('offterminal');">
+    </div>
+    
 	<div id = "help" onClick ="alert('help works')">
 	</div>
 
