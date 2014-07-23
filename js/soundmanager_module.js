@@ -15,7 +15,7 @@ var soundmanager_module = (function() {
     var tags = [];
     for(var i=0;i<urls.length;i++) {
       var tag = document.createElement('audio');
-      tag.src = tag.baseURI.replace("/index.html",urls[i]);
+      tag.src = urls[i];
       tags.push(tag);
     }
     return tags;
