@@ -140,6 +140,7 @@ var game_module = (function() {
           this.m_memoryContents.blankOut(this.m_duds.pop());
           this.onMessage('Dud removed.');
         }
+        this.m_memoryContents.blankOut(candidate);
         return;
       }
     }
