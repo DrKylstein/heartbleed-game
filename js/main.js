@@ -39,9 +39,6 @@ $(document).ready(function() {
   var game = new game_module.HeartbleedGame(memory, soundManager);
   
   //attach handlers
-  $('#power').click(function(){
-    game.reset();
-  });
   game.onMessage = $.proxy(messageBox.add, messageBox);
   memory.onChange = $.proxy(display.change, display);
   memory.onReset = $.proxy(display.reset, display);
@@ -52,6 +49,7 @@ $(document).ready(function() {
   }
   
   //set up simple gui elements
+  // tries counter
   var triesBox = $('#tries');  
   game.onTriesChange = function(num) {
     var blocks = "";
@@ -60,7 +58,30 @@ $(document).ready(function() {
     }
     triesBox.html('<span id="number-attempts">'+num+'</span> ATTEMPT(S) LEFT: <span id="blocks">'+blocks+'</span>');
   }
-  
-  //begin
-  game.reset();
+  //power button
+  function terminalOn() {
+    $('body').removeClass('offbackground'); 
+    $('#terminal-container').removeClass('offterminal');
+    game.reset();
+    $('#power').click(terminalOff);
+  }
+  function terminalOff() {
+    $('body').addClass('offbackground'); 
+    $('#terminal-container').addClass('offterminal');
+    $('#power').click(terminalOn);
+  }
+  terminalOn();
+  //sound button
+  function soundOn() {
+    $('body').removeClass('musicoffbackground'); 
+    soundManager.setEnabled(true);
+    $('#volume').click(soundOff);
+  }
+  function soundOff() {
+    $('body').addClass('musicoffbackground'); 
+    soundManager.setEnabled(false);
+    $('#volume').click(soundOn);
+  }
+  soundOn();
+
 });
