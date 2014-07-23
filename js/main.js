@@ -4,7 +4,7 @@
  * R. Murrer
  */
 
-var sounds = ["/sounds/key1.mp3","/sounds/key2.mp3","/sounds/key3.mp3","/sounds/key4.mp3","/sounds/key5.mp3"];
+var sounds = ["sounds/key1.mp3","sounds/key2.mp3","sounds/key3.mp3","sounds/key4.mp3","sounds/key5.mp3"];
 
 $(document).ready(function() {
   //generate addresses
