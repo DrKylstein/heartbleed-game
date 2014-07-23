@@ -15,7 +15,7 @@ var soundmanager_module = (function() {
     var tags = [];
     for(var i=0;i<urls.length;i++) {
       var tag = document.createElement('audio');
-      tag.src = tag.baseURI.replace("/index.html",urls[i]);
+      tag.src = urls[i];
       tags.push(tag);
     }
     return tags;
@@ -53,9 +53,11 @@ var soundmanager_module = (function() {
 
   //methods
   SoundManager.prototype.playSound = function SoundManager_playSound(name) {
-    if(enabled) {
-      var id = this.m_names.indexOf(name);
+    if(this.enabled) {
+      var id = this.m_soundNames.indexOf(name);
       if(id != null) {
+        if(this.m_playing != null)
+          this.m_playing.pause();
         this.m_playing = this.m_tags[id];
         this.m_playing.play();
       }

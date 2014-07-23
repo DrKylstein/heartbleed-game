@@ -4,6 +4,8 @@
  * R. Murrer
  */
 
+var sounds = ["/sounds/key1.mp3","/sounds/key2.mp3","/sounds/key3.mp3","/sounds/key4.mp3","/sounds/key5.mp3"];
+
 $(document).ready(function() {
   //generate addresses
   // make sure it is high enough so that it takes up 4 hex places (could add padder?)
@@ -32,7 +34,7 @@ $(document).ready(function() {
   //init components
   var display = new view_module.MemoryDisplay('#terminal-container');
   var messageBox = new view_module.MessageBox('#console');
-  var soundManager = new soundmanager_module.SoundManager('');
+  var soundManager = new soundmanager_module.SoundManager(sounds);
   var memory = new game_module.MemoryContents();
   var game = new game_module.HeartbleedGame(memory, soundManager);
   
@@ -45,6 +47,9 @@ $(document).ready(function() {
   memory.onReset = $.proxy(display.reset, display);
   game.onReset = $.proxy(messageBox.clear, messageBox);
   display.onSelection = $.proxy(game.tryItem, game);
+  display.onHover = function() {
+    soundManager.playSound("key1");
+  }
   
   //set up simple gui elements
   var triesBox = $('#tries');  
