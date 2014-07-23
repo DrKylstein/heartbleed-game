@@ -1,5 +1,5 @@
 body {
-	background-image: url('../images/background-on_music-on.png');
+
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-color:black;
@@ -71,26 +71,22 @@ body {
 
 .defaultbackground{
 	background-image: url('../images/background-on_music-on.png');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-color:black;
-	background-position: 50px 0px;
 }
 
 .musicoffbackground{
 	background-image: url('../images/background-on_music-off.png');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-color:black;
-	background-position: 50px 0px;
 }
 
 .offbackground{
 	background-image: url('../images/background-off.png');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-color:black;
-	background-position: 50px 0px;
+}
+
+.offterminal{
+	display: none;
+}
+
+.offhelp{
+	display: none;
 }
 
 .hexcol{
