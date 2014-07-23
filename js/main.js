@@ -39,13 +39,39 @@ $(document).ready(function() {
   var game = new game_module.HeartbleedGame(memory, soundManager);
   
   //attach handlers
-  game.onMessage = $.proxy(messageBox.add, messageBox);
+  //game.onMessage = $.proxy(messageBox.add, messageBox);
   memory.onChange = $.proxy(display.change, display);
   memory.onReset = $.proxy(display.reset, display);
-  game.onReset = $.proxy(messageBox.clear, messageBox);
   display.onSelection = $.proxy(game.tryItem, game);
   display.onHover = function() {
     soundManager.playSound("key1");
+  }
+  
+  //set messages and sounds
+  game.onReset = function(){
+    messageBox.clear();
+    messageBox.add("Connection established.");
+    messageBox.add("Dumping buffer... Done.");
+  }
+  //when correct password is entered
+  game.onSuccess = function() {
+    messageBox.add('ACCESS GRANTED');
+    messageBox.add('Taking total control... Done.');
+  }
+  //when incorrect password is entered
+  game.onFail = function(ratio) {
+    messageBox.add('ACCESS DENIED');
+    messageBox.add(ratio+' correct.');
+  }
+  game.onDudRemoved = function() {
+    messageBox.add('Dud removed.');
+  }
+  game.onTriesReset = function() {
+    messageBox.add('Tries reset.');
+  }
+  game.onGameOver = function() {
+    messageBox.add('CONNECTION TERMINATED');
+    messageBox.add('Backtrace detected!');
   }
   
   //set up simple gui elements

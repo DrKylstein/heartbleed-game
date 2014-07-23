@@ -111,15 +111,29 @@ var game_module = (function() {
     ];
     
     //public, just callbacks
-    this.onMessage = function(str){
-      console.warn("Unset HeartbleedGame.onMessage called: "+str);
-    };
     this.onReset = function(){
       console.warn("Unset HeartbleedGame.onReset called!");
     };
     this.onTriesChange = function(num){
       console.warn("Unset HeartbleedGame.onTriesChange called: "+num);
     };
+    //when correct password is entered
+    this.onSuccess = function() {
+      console.warn("Unset HeartbleedGame.onSuccess called.");
+    }
+    //when incorrect password is entered
+    this.onFail = function(ratio) {
+      console.warn("Unset HeartbleedGame.onFail called: "+ratio);
+    }
+    this.onDudRemoved = function() {
+      console.warn("Unset HeartbleedGame.onDudRemoved called.");
+    }
+    this.onTriesReset = function() {
+      console.warn("Unset HeartbleedGame.onTriesReset called.");
+    }
+    this.onGameOver = function() {
+      console.warn("Unset HeartbleedGame.onGameOver called");
+    }
   }
 
   //methods
@@ -135,10 +149,10 @@ var game_module = (function() {
       candidate.endsWith(style.charAt(1))) {
         if(Math.random() < GAIN_TRIES && this.m_tries < START_TRIES) {
           this.m_tries = START_TRIES;
-          this.onMessage('Attempts reset.');
+          this.onTriesReset();//this.onMessage('Attempts reset.');
         } else {
           this.m_memoryContents.blankOut(this.m_duds.pop());
-          this.onMessage('Dud removed.');
+          this.onDudRemoved();//this.onMessage('Dud removed.');
         }
         this.m_memoryContents.blankOut(candidate);
         return;
@@ -147,15 +161,15 @@ var game_module = (function() {
     
     //handle password attempts
     if(candidate == this.m_correctPassword) {
-      this.onMessage('ACCESS GRANTED');
+      this.onSuccess();//this.onMessage('ACCESS GRANTED');
       this.m_gameOver = true;
     } else {
       this.onTriesChange(--this.m_tries);
-      this.onMessage('ACCESS DENIED');
-      this.onMessage(countMatches(candidate, this.m_correctPassword)+'/'+
-        this.m_correctPassword.length+' correct.');
+      this.onFail(countMatches(candidate, this.m_correctPassword)+'/'+
+        this.m_correctPassword.length);
       if(this.m_tries <= 0) {
-          this.m_gameOver = true;
+        this.m_gameOver = true;
+        this.onGameOver();
       }
     }
   }
@@ -209,8 +223,6 @@ var game_module = (function() {
     //shuffle and submit
     shuffle(contents);
     this.m_memoryContents.fill(contents);
-    
-    this.onMessage('TERMINAL ACTIVE');
   }
 
   //export
