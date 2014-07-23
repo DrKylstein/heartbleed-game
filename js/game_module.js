@@ -88,7 +88,26 @@ var game_module = (function() {
       'fractionally',
       'orthographic',
       'precognition',
-      'mythological'
+      'mythological',
+      'ploughshares',
+      'henceforward',
+      'cloverleaves',
+      'congregating',
+      'intensifiers',
+      'redecorating',
+      'vicissitudes',
+      'peacekeeping',
+      'disincentive',
+      'designations',
+      'semitrailers',
+      'thunderstorm',
+      'boondoggling',
+      'plasterboard',
+      'scoutmasters',
+      'unprejudiced',
+      'misjudgments',
+      'demographics',
+      'belligerents'
     ];
     
     //public, just callbacks

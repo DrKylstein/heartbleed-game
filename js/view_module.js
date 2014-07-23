@@ -67,7 +67,11 @@ var view_module = (function(){
         var context = this; //event `this` is not same as member `this`
         $(html[i]).appendTo(target)
           .click(function(){context.onSelection(index)})
-          .hover(function(){context.onHover(index)});
+          .mouseenter(function(){
+            context.onHover(index);
+            $('.js-word-'+index).addClass('js-word-hover');
+          })
+          .mouseleave(function(){$('.js-word-'+index).removeClass('js-word-hover')});
       }
       
     } else {
