@@ -56,6 +56,8 @@ var soundmanager_module = (function() {
     if(this.enabled) {
       var id = this.m_soundNames.indexOf(name);
       if(id != null) {
+        if(this.m_playing != null)
+          this.m_playing.pause();
         this.m_playing = this.m_tags[id];
         this.m_playing.play();
       }
