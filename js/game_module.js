@@ -146,7 +146,7 @@ var game_module = (function() {
     for(var i = 0; i < BRACES.length; i++) {
       var style = BRACES[i];
       if(candidate.charAt(0) === style.charAt(0) && 
-      candidate.charAt(candidate.length) === style.charAt(1)) {
+      candidate.charAt(candidate.length-1) === style.charAt(1)) {
         if(Math.random() < GAIN_TRIES && this.m_tries < START_TRIES) {
           this.m_tries = START_TRIES;
           this.onTriesChange(this.m_tries);
