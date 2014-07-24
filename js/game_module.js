@@ -145,8 +145,8 @@ var game_module = (function() {
     //handle braces
     for(var i = 0; i < BRACES.length; i++) {
       var style = BRACES[i];
-      if(candidate.startsWith(style.charAt(0)) && 
-      candidate.endsWith(style.charAt(1))) {
+      if(candidate.charAt(0)===style.charAt(0) && 
+      candidate.charAt(candidate.length-1)===style.charAt(1)) {
         if(Math.random() < GAIN_TRIES && this.m_tries < START_TRIES) {
           this.m_tries = START_TRIES;
           this.onTriesChange(this.m_tries);
