@@ -4,7 +4,7 @@
  * R. Murrer
  */
 
-var sounds = ["sounds/key1.mp3","sounds/key2.mp3","sounds/key3.mp3","sounds/key4.mp3","sounds/key5.mp3"];
+var sounds = ["sounds/key1.mp3","sounds/key2.mp3","sounds/key3.mp3","sounds/key4.mp3","sounds/key5.mp3", "sounds/success.mp3", "sounds/fail.mp3", "sounds/bonus1.mp3", "sounds/lose.mp3"];
 
 $(document).ready(function() {
   //generate addresses
@@ -57,21 +57,26 @@ $(document).ready(function() {
   game.onSuccess = function() {
     messageBox.add('ACCESS GRANTED');
     messageBox.add('Taking total control... Done.');
+    soundManager.playSound('success');
   }
   //when incorrect password is entered
   game.onFail = function(ratio) {
     messageBox.add('ACCESS DENIED');
     messageBox.add(ratio+' correct.');
+    soundManager.playSound('fail');
   }
   game.onDudRemoved = function() {
     messageBox.add('Dud removed.');
+      soundManager.playSound('bonus1');
   }
   game.onTriesReset = function() {
     messageBox.add('Tries reset.');
+      soundManager.playSound('bonus1');
   }
   game.onGameOver = function() {
     messageBox.add('CONNECTION TERMINATED');
     messageBox.add('Backtrace detected!');
+      soundManager.playSound('lose');
   }
   
   //set up simple gui elements
