@@ -52,13 +52,19 @@ var soundmanager_module = (function() {
   }
 
   //methods
-  SoundManager.prototype.playSound = function SoundManager_playSound(name) {
+  SoundManager.prototype.playSound = function SoundManager_playSound(name, volume) {
     if(this.enabled) {
+
+      var t_vol = 100/100;
+      if(typeof volume !== "undefined")
+        t_vol = volume/100;
+
       var id = this.m_soundNames.indexOf(name);
       if(id != null) {
         if(this.m_playing != null)
           this.m_playing.pause();
         this.m_playing = this.m_tags[id];
+        this.m_playing.volume = t_vol;
         this.m_playing.play();
       }
     }

@@ -63,11 +63,11 @@ $(document).ready(function() {
   game.onFail = function(ratio) {
     messageBox.add('ACCESS DENIED');
     messageBox.add(ratio+' correct.');
-    soundManager.playSound('fail');
+    soundManager.playSound('fail', 25);
   }
   game.onDudRemoved = function() {
     messageBox.add('Dud removed.');
-      soundManager.playSound('bonus1');
+      soundManager.playSound('bonus1', 25);
   }
   game.onTriesReset = function() {
     messageBox.add('Tries reset.');
@@ -76,7 +76,7 @@ $(document).ready(function() {
   game.onGameOver = function() {
     messageBox.add('CONNECTION TERMINATED');
     messageBox.add('Backtrace detected!');
-      soundManager.playSound('lose');
+      soundManager.playSound('lose', 50);
   }
   
   //set up simple gui elements
