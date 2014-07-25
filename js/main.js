@@ -94,11 +94,13 @@ $(document).ready(function() {
     $('body').removeClass('offbackground'); 
     $('#terminal-container').removeClass('offterminal');
     game.reset();
+    $('#power').unbind('click', terminalOn);
     $('#power').click(terminalOff);
   }
   function terminalOff() {
     $('body').addClass('offbackground'); 
     $('#terminal-container').addClass('offterminal');
+    $('#power').unbind('click', terminalOff);
     $('#power').click(terminalOn);
   }
   terminalOn();
