@@ -15,6 +15,30 @@
 </head>
 <body class = 'defaultbackground'>
 
+	
+	<div class = "offhelp " id ="help-container">
+		<br>
+		<p>Welcome to Heartbleed</p>
+		<br>
+		<p>RULES/GAMEPLAY:</p>
+		<p>When the monitor is on, memory addresses are displayed in</p>
+		<p>the terminal. Each memory address contains characters and</p>
+		<p> strings (passwords). The user is given 4 attempts to</p>
+		<p> correctly select the password that will hack the WOPR</p>
+		<p>network.</p> 
+		<br>
+		<p>-If an incorrect password is selected the number of</p> 
+		<p>characters (letters) that are in the correct position will</p>
+		<p>be displayed.</p>
+		<p>-If the number of attempts have been exhausted the user will</p>
+		<p>be locked out of the network and be forced to try again.</p>
+		<p>-If the correct password is selected the user will be</p>
+		<p>notified that they have successfully hacked the network.</p>
+		<br>
+		<p>OPTIONS:</p>
+		<p>Audio ON/OFF – Click the power button on the right speaker.</p>
+	</div>
+
 <div id="terminal-container">
   <div id="info">
     <h1>WOPR</h1>
@@ -65,7 +89,7 @@
     <div id = "power">
     </div>
     
-	<div id = "help" onClick ="alert('help works')">
+	<div id = "help" onClick ="$('#help-container').toggleClass('offhelp');" >
 	</div>
 
 
