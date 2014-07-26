@@ -260,7 +260,11 @@ var game_module = (function() {
   MemoryContents.prototype.blankOut = function MemoryContents_blankOut(index) {
     if(index >= 0 && index < this.m_items.length) {
       var oldString = this.m_items[index];
-      this.m_items[index] = '.'.repeat(oldString.length);
+      var blank = '';
+      for(var i = 0; i < oldString.length; i++) {
+        blank += '.';
+      }
+      this.m_items[index] = blank;
       this.onChange(index, this.m_items[index]);
     }
   }
