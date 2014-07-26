@@ -132,7 +132,34 @@ body {
 	position: absolute;
 	left:230px;
 	top: 114px;
+	z-index: 1;
 }
+
+#help-container
+{
+	font:13px  "Lucida Console", monospace, serif;
+	color: black;
+	background-color: #909090;
+	width: 865px;
+	height: 437px;
+	font-size: 1.2em;
+	letter-spacing: initial;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	position: absolute;
+	left:230px;
+	top: 114px;
+	opacity: 1;
+	z-index: 3;
+	border-radius: 25px;
+}
+
+
+
 
 #info
 {
