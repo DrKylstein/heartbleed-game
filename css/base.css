@@ -114,14 +114,13 @@ body {
 
 #terminal-container
 {
-	font:13px  "Lucida Console", monospace, serif;
+	font:18px  "Lucida Console", monospace, serif;
 	color:#00FF00;
 	background-color: black;
 	width: 865px;
 	height: 437px;
 	/*margin: 100px auto 100px auto;
 	overflow:hidden;*/
-	font-size: 1.2em;
 	letter-spacing: initial;
 	speak: none;
 	font-style: normal;
