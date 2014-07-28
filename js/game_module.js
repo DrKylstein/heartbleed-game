@@ -69,47 +69,70 @@ var game_module = (function() {
     this.m_gameOver = false;
     this.m_duds = [];
     this.m_wordPool = [
-      'enthronement',
-      'untimeliness',
-      'steeplejacks',
-      'gesticulates',
-      'spitefullest',
-      'coefficients',
-      'dispossesses',
-      'discomposure',
-      'electroplate',
       'anthologists',
-      'uncultivated',
       'articulating',
-      'peccadilloes',
+      'amalgamation',
+      'affirmatives',
+      'belligerents',
+      'blackmailing',
+      'boondoggling',
       'brinkmanship',
       'carbohydrate',
-      'computations',
-      'fractionally',
-      'orthographic',
-      'precognition',
-      'mythological',
-      'ploughshares',
-      'henceforward',
+      'chatterboxes',
       'cloverleaves',
+      'coefficients',
+      'computations',
       'congregating',
-      'intensifiers',
-      'redecorating',
-      'vicissitudes',
-      'peacekeeping',
-      'disincentive',
-      'designations',
-      'semitrailers',
-      'thunderstorm',
-      'boondoggling',
-      'plasterboard',
-      'scoutmasters',
-      'unprejudiced',
-      'misjudgments',
+      'democratized',
       'demographics',
-      'belligerents'
+      'designations',
+      'discomposure',
+      'disincentive',
+      'dispossesses',
+      'electroplate',
+      'enthronement',
+      'endorsements',
+      'eucalyptuses',
+      'foreclosures',
+      'fractionally',
+      'gesticulates',
+      'generosities',
+      'henceforward',
+      'intensifiers',
+      'irritability',
+      'misjudgments',
+      'mythological',
+      'mechanically',
+      'modification',
+      'orthographic',
+      'participates',
+      'peacekeeping',
+      'peccadilloes',
+      'plasterboard',
+      'ploughshares',
+      'precognition',
+      'prioritizing',
+      'problematics',
+      'redecorating',
+      'reconnecting',
+      'reiterations',
+      'repossession',
+      'scoutmasters',
+      'semitrailers',
+      'speedometers',
+      'spitefullest',
+      'steeplejacks',
+      'thunderstorm',
+      'uncultivated',
+      'unprejudiced',
+      'untimeliness',
+      'unsuspecting',
+      'ubelieveably',
+      'vicissitudes',
+      'watercourses',
+      'youthfulness'
     ];
-    
+        
     //public, just callbacks
     this.onReset = function(){
       console.warn("Unset HeartbleedGame.onReset called!");
@@ -185,6 +208,11 @@ var game_module = (function() {
     //choose password
     this.m_correctPassword = this.m_wordPool[0];
     console.log("The secret word is: "+this.m_correctPassword);
+    
+    var std = this.m_correctPassword;
+    this.m_wordPool.sort(function (a,b){
+      return countMatches(b, std) - countMatches(a, std)
+    })
     
     //fill memory
     var contents = [];
