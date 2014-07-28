@@ -138,8 +138,8 @@ body {
 #help-container
 {
 	font:13px  "Lucida Console", monospace, serif;
-	color: black;
-	background-color: #909090;
+	color: #42B9E7;
+	background-color: black;
 	width: 865px;
 	height: 437px;
 	font-size: 1.2em;
@@ -155,11 +155,7 @@ body {
 	top: 114px;
 	opacity: 1;
 	z-index: 3;
-	border-radius: 25px;
 }
-
-
-
 
 #info
 {
