@@ -182,6 +182,11 @@ body {
     /*word-break: break-all;*/
 }
 
+#addresses-1, #addresses-2, #characters-1, #characters-2
+{
+	text-transform: uppercase;
+}
+
 #console
 {
     width: 220px;
