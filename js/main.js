@@ -96,12 +96,17 @@ $(document).ready(function() {
     game.reset();
     $('#power').unbind('click', terminalOn);
     $('#power').click(terminalOff);
+    $('#help').click(function(){
+      $('#help-container').toggleClass('offhelp');
+    });
   }
   function terminalOff() {
     $('body').addClass('offbackground'); 
     $('#terminal-container').addClass('offterminal');
     $('#power').unbind('click', terminalOff);
     $('#power').click(terminalOn);
+    $('#help').unbind();
+    $('#help-container').addClass('offhelp');
   }
   terminalOn();
   //sound button
