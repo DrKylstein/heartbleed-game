@@ -39,13 +39,9 @@ $(document).ready(function() {
   var game = new game_module.HeartbleedGame(memory, soundManager);
   
   //attach handlers
-  //game.onMessage = $.proxy(messageBox.add, messageBox);
   memory.onChange = $.proxy(display.change, display);
   memory.onReset = $.proxy(display.reset, display);
   display.onSelection = $.proxy(game.tryItem, game);
-  display.onHover = function() {
-    soundManager.playSound("key1");
-  }
   
   //set messages and sounds
   game.onReset = function(){
