@@ -112,7 +112,7 @@ body {
  * Rob Murrer
 */
 
-#terminal-container
+#terminal-container, #highscores
 {
 	font:18px  "Lucida Console", monospace, serif;
 	color:#00FF00;
@@ -201,4 +201,46 @@ body {
 .js-word-hover {
 	color: black;
 	background: #00FF00;
+}
+
+/* 
+ * Styling for the Highscore screen
+ * Chris Brice
+*/
+
+.hs-center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  text-align: center;
+}
+
+.hs-bottom {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+}
+
+#hs-title {
+	padding: 5px;
+	padding-bottom: 10px;
+	font-size: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+} 
+
+td {
+  text-align: right;
+}
+
+th {
+  border-bottom : 1px solid #00FF00;
+  text-align: center;
 }

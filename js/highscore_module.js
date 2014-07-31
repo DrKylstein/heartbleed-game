@@ -19,19 +19,26 @@ var highscore_module = (function() {
   {
     //private
     if(typeof name !== "undefined")  this.m_name = name;
-   
+    this.m_pullTime = Date.now();
+
     //public
-    this.scores = [];
-    
+    this.scores = []; 
+    this.pullScores();
   }
 
   //methods
-  Highscore.prototype.getScores = function Highscore_getScores() {
-    $.getJSON("/api/highscores", function(data) {
-      this.scores = data;
-    });
-    
+  Highscore.prototype.getScores = function Highscore_getScores() {    
+    if(Date.now()-this.m_pullTime == 2000) {
+      pullScores();
+    }
     return this.scores;
+  }
+
+  Highscore.prototype.pullScores = function Highscore_pullScores() {
+    var self = this;
+    $.getJSON("http://game.brice.io/api/highscores", function(data) {
+      self.scores = data;
+    });
   }
   
   Highscore.prototype.postScore = function Highscore_postScore(name, score) {
@@ -45,6 +52,13 @@ var highscore_module = (function() {
   
   Highscore.prototype.setName = function Highscore_postScore(name) {
     this.m_name = name;
+  }
+
+  Highscore.prototype.showScores = function() {
+    var scores = this.getScores();
+    $.each(scores, function(i, item) {
+      $("#scores > tbody").append("<tr><td>"+(i+1)+"</td><td>"+item.name+"</td><td>"+item.score+"</td></tr>");
+    });
   }
 
   //export

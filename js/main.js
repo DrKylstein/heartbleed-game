@@ -37,6 +37,7 @@ $(document).ready(function() {
   var soundManager = new soundmanager_module.SoundManager(sounds);
   var memory = new game_module.MemoryContents();
   var game = new game_module.HeartbleedGame(memory, soundManager);
+  var highscore = new highscore_module.Highscore();
   
   //attach handlers
   memory.onChange = $.proxy(display.change, display);
@@ -109,13 +110,21 @@ $(document).ready(function() {
   function soundOn() {
     $('body').removeClass('musicoffbackground'); 
     soundManager.setEnabled(true);
+    $('#volume').unbind('click', soundOn);
     $('#volume').click(soundOff);
   }
   function soundOff() {
     $('body').addClass('musicoffbackground'); 
     soundManager.setEnabled(false);
+    $('#volume').unbind('click', soundOff);
     $('#volume').click(soundOn);
   }
   soundOn();
+
+  function showHighscore() {
+    highscore.showScores();
+    $('#terminal-container').addClass('offterminal');
+    $("#highscores").removeClass("offterminal");
+  }
 
 });
