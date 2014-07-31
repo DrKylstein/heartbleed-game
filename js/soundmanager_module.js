@@ -64,6 +64,7 @@ var soundmanager_module = (function() {
         if(this.m_playing != null)
           this.m_playing.pause();
         this.m_playing = this.m_tags[id];
+        //this.m_playing.currentTime = 0;
         this.m_playing.volume = t_vol;
         this.m_playing.play();
       }

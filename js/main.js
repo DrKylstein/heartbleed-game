@@ -30,6 +30,9 @@ $(document).ready(function() {
     address += 96; // 12 chars * 8 bits
   }
   $('#addresses-2').html(abuffer);
+
+  var usedBrackets = 0;
+  var score = 0;
     
   //init components
   var display = new view_module.MemoryDisplay('#terminal-container');
@@ -37,6 +40,7 @@ $(document).ready(function() {
   var soundManager = new soundmanager_module.SoundManager(sounds);
   var memory = new game_module.MemoryContents();
   var game = new game_module.HeartbleedGame(memory, soundManager);
+  var highscore = new highscore_module.Highscore();
   
   //attach handlers
   memory.onChange = $.proxy(display.change, display);
@@ -54,6 +58,7 @@ $(document).ready(function() {
     messageBox.add('ACCESS GRANTED');
     messageBox.add('Taking total control... Done.');
     soundManager.playSound('success');
+    setTimeout(showHighscore, 1000);
   }
   //when incorrect password is entered
   game.onFail = function(ratio) {
@@ -62,17 +67,21 @@ $(document).ready(function() {
     soundManager.playSound('fail', 25);
   }
   game.onDudRemoved = function() {
+    usedBrackets += 1;
     messageBox.add('Dud removed.');
-      soundManager.playSound('bonus1', 25);
+    soundManager.playSound('bonus1', 25);
   }
   game.onTriesReset = function() {
+    usedBrackets += 1;
     messageBox.add('Tries reset.');
-      soundManager.playSound('bonus1');
+    soundManager.playSound('bonus1');
   }
   game.onGameOver = function() {
     messageBox.add('CONNECTION TERMINATED');
     messageBox.add('Backtrace detected!');
-      soundManager.playSound('lose', 50);
+    soundManager.playSound('lose', 50);
+    score -= 1000;
+    setTimeout(showHighscore, 1200);
   }
   
   //set up simple gui elements
@@ -103,19 +112,42 @@ $(document).ready(function() {
     $('#power').click(terminalOn);
     $('#help').unbind();
     $('#help-container').addClass('offhelp');
+    $("#highscores").addClass("offterminal");
   }
   terminalOn();
   //sound button
   function soundOn() {
     $('body').removeClass('musicoffbackground'); 
     soundManager.setEnabled(true);
+    $('#volume').unbind('click', soundOn);
     $('#volume').click(soundOff);
   }
   function soundOff() {
     $('body').addClass('musicoffbackground'); 
     soundManager.setEnabled(false);
+    $('#volume').unbind('click', soundOff);
     $('#volume').click(soundOn);
   }
   soundOn();
+
+  function showHighscore() {
+    highscore.showScores(highscore);
+    score = 5000-(game.totalTries*500)+usedBrackets*200;
+    $("#scoreSub").click(subScore);
+    $("#curScore").append(String(score));
+    $('#terminal-container').addClass('offterminal');
+    $("#highscores").removeClass("offterminal");
+  }
+
+  function hideScores() {
+    $("#highscores").addClass("offterminal");
+
+  }
+
+  function subScore() {
+    var name = $('#scoreName').val();
+    highscore.postScore(name,score);
+    setTimeout(function(){highscore.showScores(highscore)}, 2000);
+  }
 
 });

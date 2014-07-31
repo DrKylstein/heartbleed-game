@@ -132,6 +132,8 @@ var game_module = (function() {
       'watercourses',
       'youthfulness'
     ];
+
+    this.totalTries = 0;
         
     //public, just callbacks
     this.onReset = function(){
@@ -182,7 +184,7 @@ var game_module = (function() {
         return;
       }
     }
-    
+    this.totalTries += 1;
     //handle password attempts
     if(candidate == this.m_correctPassword) {
       this.onSuccess();//this.onMessage('ACCESS GRANTED');
