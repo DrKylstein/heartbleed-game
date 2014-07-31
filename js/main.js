@@ -134,7 +134,7 @@ $(document).ready(function() {
     highscore.showScores(highscore);
     score = 5000-(game.totalTries*500)+usedBrackets*200;
     $("#scoreSub").click(subScore);
-    $("#curScore").append(String(score));
+    $("#curScore").text(score);
     $('#terminal-container').addClass('offterminal');
     $("#highscores").removeClass("offterminal");
   }
